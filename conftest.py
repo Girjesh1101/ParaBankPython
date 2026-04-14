@@ -4,12 +4,12 @@ from playwright.sync_api import Page
 
 from utils.logger import log_file
 
-BASE_URl = "https://parabank.parasoft.com/parabank"
+BASE_URL = "https://parabank.parasoft.com/parabank"
 API_BASE_URL = "https://parabank.parasoft.com/parabank/services/bank"
 
 @pytest.fixture(scope="session")
 def base_url():
-    return BASE_URl
+    return BASE_URL
 
 @pytest.fixture(scope="session")
 def api_base_url():
@@ -20,7 +20,7 @@ def api_base_url():
 
 @pytest.fixture(scope="function")
 def setup(page:Page):
-    page.goto(f"{BASE_URl}/index.htm")
+    page.goto(f"{BASE_URL}/index.htm")
     return page
 
 @pytest.hookimpl(hookwrapper=True)
