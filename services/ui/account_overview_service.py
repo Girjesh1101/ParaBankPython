@@ -45,3 +45,26 @@ class AccountOverviewService:
 
         return  transactions
 
+    @allure.step("verify bill paid and capture account number and amount")
+    def verify_bill_paid(self):
+        amount = self.overview_page.capture_amount()
+        account = self.overview_page.capture_account_number()
+        completed_message = self.overview_page.verify_bill_paid()
+        assert completed_message == "Bill Payment Complete"
+        return amount ,account
+
+
+    @allure.step("verify transaction exists")
+    def verify_transaction(self, expected_amount:str):
+        transactions = self.get_transactions(month="All", transaction_type="Debit")
+
+        #attached to allure for visibility
+        self.capture_transactions_to_allure(month="All", transaction_type="Debit")
+
+        matching = [
+            t for t in transactions
+            if expected_amount in t['debit']
+        ]
+        assert  len(matching) > 0, \
+        f"no debit transaction found for {expected_amount}"
+        return  matching[0]
