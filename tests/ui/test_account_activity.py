@@ -56,7 +56,7 @@ def test_capture_debit_transactions(setup):
     account_overview_service.click_overview(account_number)
     transactions = account_overview_service.capture_transactions_to_allure(month="All", transaction_type="Debit")
     for t in transactions:
-        assert t["debit"] != "", f"Expect credit transaction but got{t}"
+        assert t["debit"] != "", f"Expect debit transaction but got{t}"
 
     time.sleep(3)
 
