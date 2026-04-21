@@ -45,8 +45,13 @@ class LoanRequestPage:
         return self.verify_loan_status_label.inner_text()
 
 
-    @allure.step("get account number")
+    @allure.step("get new loan account number")
     def get_account_no(self):
-        self.page.wait_for_selector("#newAccountId:not([href=''])", state="visible" , timeout=15000)
+        self.page.wait_for_selector("#newAccountId", state="visible" , timeout=15000)
         print( "Acc:",self.capture_account_id.inner_text())
         return self.capture_account_id.inner_text()
+
+    @allure.step("Check if loan Approved")
+    def is_loan_approved(self):
+        status = self.get_loan_status()
+        return status == "Approved"
