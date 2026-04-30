@@ -16,6 +16,10 @@ class UserFactory:
                 "name":"",
                 "email": "",
                 "password": ""
-                }
+                },
+            "login":{
+                "email": "prem@yopmail.com",
+                "password": "Automation@2026"
+            }
         }
         return user_data[user_type]
